@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom'
 
 import Genre from '../services/genre'
-
-const URL_POSTER = "https://image.tmdb.org/t/p/w342"
+import Utils from '../services/utils'
 
 export default class Movie extends Component {
 
@@ -31,7 +31,7 @@ export default class Movie extends Component {
             <div className="col-sm-12">
                 <div className="row px-2">
                     <div className="col-md-4">
-                        <img width={150} alt="poster" src={URL_POSTER + movie.poster_path} />
+                        <img alt="poster" src={Utils.getPosterUrl() + movie.poster_path} />
                     </div>
                 
                     <div className="col-sm-8">
@@ -43,6 +43,9 @@ export default class Movie extends Component {
                         </div>
                         <div className="row">
                             Release date: <label className="label label-info">{movie.release_date}</label>
+                        </div>
+                        <div className="row">
+                            <Link to={`/detail/${movie.id}`}>See details</Link>
                         </div>
                     </div>
                 </div>
