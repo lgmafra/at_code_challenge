@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
+
 import api from '../services/api'
+import Utils from '../services/utils'
 
 import Movie from '../components/Movie'
-
-const token = "1f54bd990f1cdfb230adb312546d765d"
 
 export default class Home extends Component {
 
@@ -12,9 +12,9 @@ export default class Home extends Component {
     }
 
     getMovies = async () => {
-        const response = await api.get('discover/movie',{
+        const response = await api.get('movie/upcoming',{
             params: {
-                api_key: token
+                api_key: Utils.getAuthToken()
             },
             config: {
                 headers: {'Access-Control-Allow-Origin': '*'}
