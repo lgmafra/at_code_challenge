@@ -1,10 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import "@babel/polyfill"
+import './css/index.css';
+import * as serviceWorker from './serviceWorker';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import App from "./components/App"
-// import Home from './pages/Home'
 
-ReactDOM.render((<App/>),document.getElementById("app"))
+ReactDOM.render((<App/>),document.getElementById("root"))
+serviceWorker.unregister();
