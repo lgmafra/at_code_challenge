@@ -42,7 +42,7 @@ export default class Movie extends Component {
                             {movie.title}
                         </div>
                         <div className="row">
-                            Release date: <label className="label label-info">{movie.release_date}</label>
+                            Release date: <label className="btn btn-sm btn-success">{movie.release_date}</label>
                         </div>
                         <div className="row">
                             <Link to={`/detail/${movie.id}`}>See details</Link>
