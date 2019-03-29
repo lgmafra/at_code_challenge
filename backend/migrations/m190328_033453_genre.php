@@ -26,19 +26,4 @@ class m190328_033453_genre extends Migration
     {
         $this->dropTable("genre");
     }
-
-    /*
-    // Use up()/down() to run migration code without a transaction.
-    public function up()
-    {
-
-    }
-
-    public function down()
-    {
-        echo "m190328_033453_genre cannot be reverted.\n";
-
-        return false;
-    }
-    */
 }

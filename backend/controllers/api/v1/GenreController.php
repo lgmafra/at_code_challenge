@@ -24,6 +24,16 @@ class GenreController extends ActiveController {
         ], parent::behaviors());
     }
 
+    public function actions()
+    {
+        $actions = parent::actions();
+
+        // disable the "delete" and "update" actions
+        unset($actions['delete'], $actions['update']);
+
+        return $actions;
+    }
+
     public function actionSearch()
     {
         return Genre::find()->where(['in', 'genre_id', Yii::$app->request->queryParams['genre_id']])->all();

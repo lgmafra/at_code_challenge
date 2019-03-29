@@ -63,6 +63,14 @@ $config = [
                         'GET search' => 'search',
                     ],
                 ],
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'api/v1/favorite',
+                    'extraPatterns' => [
+                        'GET search' => 'search',
+//                        'POST' => 'search',
+                    ],
+                ],
                 // '/' => 'site/index',
             ],
         ],
