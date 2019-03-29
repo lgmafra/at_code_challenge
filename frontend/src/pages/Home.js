@@ -4,37 +4,62 @@ import api from '../services/api'
 import Utils from '../services/utils'
 
 import Movie from '../components/Movie'
+import Pagination from '../components/Pagination'
 
 export default class Home extends Component {
 
     state = {
         movies: [],
-        query_movie: ''
+        query_movie: '',
+        page: null,
+        totalPages: null
     }
 
-    getMovies = async () => {
+    getMovies = async (page = 1) => {
         const response = await api.get('movie/upcoming',{
             params: {
-                api_key: Utils.getAuthToken()
+                api_key: Utils.getAuthToken(),
+                page: page
             }
         })
 
-        this.setState({movies: response.data.results})
+        this.setMovieData(response)
     }
 
-    getMovieByFilter = async (filter) => {
+    getMovieByFilter = async (filter, page = 1) => {
         const response = await api.get('search/movie',{
             params: {
                 api_key: Utils.getAuthToken(),
-                query: filter
+                query: filter,
+                page: page
             }
         })
 
-        this.setState({movies: response.data.results})
+        this.setMovieData(response)
     }
 
     componentDidMount(){
-        this.props.genres()
+        const { page } = this.props.match.params;
+        this.props.genres(page)
+    }
+
+    setMovieData = (response) => {
+        this.setState({
+            page: response.data.page,
+            totalPages: response.data.total_pages,
+            movies: response.data.results
+        })
+    }
+
+    async componentDidUpdate(prevProps) {
+        const { page } = this.props.match.params;
+        if ( page !== prevProps.match.params.page) {
+            if(this.state.query_movie !== ''){
+                this.getMovieByFilter(this.state.query_movie, page)
+            }else{
+                this.getMovies(page)
+            }
+        }
     }
 
     handleChange = (event) => {
@@ -51,24 +76,38 @@ export default class Home extends Component {
         }
     }
 
-    render() {        
+    rendeClearButton = () => {
         return (
-            <div className="col-sm-12">
-                <div className="row">
+            <button onClick={() => {
+                this.setState({query_movie: ''})
+                this.getMovies()
+            }} className="ml-1 btn btn-danger">
+                <i className="fa fa-times"></i>
+            </button>
+        )
+    }
+
+    render() {
+        return (
+            <div className="col-sm-12 mt-2">
+                <Pagination page={this.state.page} totalPages={this.state.totalPages} />
+                <div className="row col-sm-12">
                     <div className="col-sm-4">
-                        <div className="row">
+                        <div className="row mt-1">
                             <div className="form-group">
                                 <form onSubmit={this.handleSubmit}>
                                     <div className="input-group">
                                         <input
                                             type="text"
-                                            className="form-control"
+                                            className="form-control ml-1"
                                             placeholder="Search by movie"
                                             onChange={this.handleChange}
+                                            value={this.state.query_movie}
                                         />
-                                        <button type="submit" className="btn btn-info">
-                                            Search
+                                        <button type="submit" className="ml-1 btn btn-info">
+                                            <i className="fa fa-search"></i>
                                         </button>
+                                        {this.state.query_movie !== '' && this.rendeClearButton()}
                                     </div>
                                 </form>
                             </div>

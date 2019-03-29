@@ -17,7 +17,7 @@ class App extends Component {
         this.homeRef = React.createRef()
     }
 
-    loadGenres = async () => {
+    loadGenres = async (page = 1) => {
         const genres = await api.get('/genre/movie/list', {
             params: {
                 api_key: Utils.getAuthToken()
@@ -29,7 +29,7 @@ class App extends Component {
         })
 
         Promise.all(result).then(() => {
-            this.homeRef.current.getMovies()
+            this.homeRef.current.getMovies(page)
         })
     }
 
@@ -39,7 +39,7 @@ class App extends Component {
                 <header className="App-header">
                     <BrowserRouter>
                         <Switch>
-                            <Route exact path="/" component={() => <Home genres={this.loadGenres} ref={this.homeRef} />} />
+                            <Route exact path="/:page?" component={(props) => <Home {...props} genres={this.loadGenres} ref={this.homeRef} />} />
                             <Route path="/detail/:id" component={MovieDetail} />
                         </Switch>
                     </BrowserRouter>
