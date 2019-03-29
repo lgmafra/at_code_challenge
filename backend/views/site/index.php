@@ -1,0 +1,1 @@
+<div id="app" class="columns"><!-- React --></div>
