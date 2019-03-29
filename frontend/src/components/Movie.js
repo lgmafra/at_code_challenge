@@ -13,12 +13,14 @@ export default class Movie extends Component {
     getGenres = async (genre_ids) => {
         const genres_name = []
         let genres = await Genre.getGenreNames(genre_ids)
-
-        genres.data.map(genre => (
-            genres_name.push(genre.name)
-        ))
-
-        this.setState({genres_name: genres_name.join(', ')})
+        
+        if(genres.data){
+            genres.data.map(genre => (
+                genres_name.push(genre.name)
+            ))
+    
+            this.setState({genres_name: genres_name.join(', ')})
+        }
     }
 
     async componentDidMount(){

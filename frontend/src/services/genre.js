@@ -22,16 +22,20 @@ export default class Genre {
     }
 
     static getGenreNames = async (genre_id) => {
-        let g = await localApi.get('search', {
-            params: {
-                genre_id: genre_id
-            },
-            withCredentials: false,
-            headers: {
-                "Access-Control-Allow-Origin": "*"
-            }
-        })
+        if(genre_id.length > 0){
+            let g = await localApi.get('search', {
+                params: {
+                    genre_id: genre_id
+                },
+                withCredentials: false,
+                headers: {
+                    "Access-Control-Allow-Origin": "*"
+                }
+            })
+    
+            return g
+        }
 
-        return g
+        return {}
     }
 }
