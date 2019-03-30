@@ -10,8 +10,8 @@ use Yii;
  * @property int $favorite_id
  * @property int $genre_id
  *
- * @property Favorite $genre
- * @property Genre $favorite
+ * @property Genre $genre
+ * @property Favorite $favorite
  */
 class FavoriteGenres extends \yii\db\ActiveRecord
 {
@@ -31,8 +31,8 @@ class FavoriteGenres extends \yii\db\ActiveRecord
         return [
             [['favorite_id', 'genre_id'], 'required'],
             [['favorite_id', 'genre_id'], 'integer'],
-            [['genre_id'], 'exist', 'skipOnError' => true, 'targetClass' => Favorite::className(), 'targetAttribute' => ['genre_id' => 'id']],
-            [['favorite_id'], 'exist', 'skipOnError' => true, 'targetClass' => Genre::className(), 'targetAttribute' => ['favorite_id' => 'id']],
+            [['genre_id'], 'exist', 'skipOnError' => true, 'targetClass' => Genre::className(), 'targetAttribute' => ['genre_id' => 'id']],
+            [['favorite_id'], 'exist', 'skipOnError' => true, 'targetClass' => Favorite::className(), 'targetAttribute' => ['favorite_id' => 'id']],
         ];
     }
 
@@ -47,12 +47,21 @@ class FavoriteGenres extends \yii\db\ActiveRecord
         ];
     }
 
+    public function fields()
+    {
+        return [
+            'favorite_id',
+            'genre_id',
+            'genre'
+        ];
+    }
+
     /**
      * @return \yii\db\ActiveQuery
      */
     public function getGenre()
     {
-        return $this->hasOne(Favorite::className(), ['id' => 'genre_id']);
+        return $this->hasOne(Genre::className(), ['id' => 'genre_id']);
     }
 
     /**
@@ -60,6 +69,6 @@ class FavoriteGenres extends \yii\db\ActiveRecord
      */
     public function getFavorite()
     {
-        return $this->hasOne(Genre::className(), ['id' => 'favorite_id']);
+        return $this->hasOne(Favorite::className(), ['id' => 'favorite_id']);
     }
 }

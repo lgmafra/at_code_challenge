@@ -44,7 +44,7 @@ class FavoriteController extends ActiveController
 
     public function actionCreate(){
         $model = new Favorite();
-        $params = \Yii::$app->request->post();
+        $params = Yii::$app->getRequest()->getBodyParams()['params'];
 
         $genres_id = $params['genre_ids'];
         unset($params['genre_ids']);
@@ -67,6 +67,13 @@ class FavoriteController extends ActiveController
         }
 
         return $model;
+    }
+
+    public function actionSearch()
+    {
+//        var_dump(Yii::$app->request->queryParams['movie_id']);
+//        exit();
+        return Favorite::find()->where(['in', 'movie_id', Yii::$app->request->queryParams['movie_id']])->all();
     }
 
 }

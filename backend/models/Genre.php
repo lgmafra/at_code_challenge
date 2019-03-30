@@ -44,4 +44,12 @@ class Genre extends \yii\db\ActiveRecord
             'name' => 'Name',
         ];
     }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getFavoriteGenres()
+    {
+        return $this->hasMany(FavoriteGenres::className(), ['genre_id' => 'id']);
+    }
 }

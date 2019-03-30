@@ -60,12 +60,8 @@ class Favorite extends \yii\db\ActiveRecord
             'title',
             'release_date',
             'movie_id',
+            'genres' => 'favoriteGenres'
         ];
-    }
-
-    public function extraFields()
-    {
-        return ['favoriteGenres'];
     }
 
     /**

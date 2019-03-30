@@ -68,10 +68,8 @@ $config = [
                     'controller' => 'api/v1/favorite',
                     'extraPatterns' => [
                         'GET search' => 'search',
-//                        'POST' => 'search',
                     ],
                 ],
-                // '/' => 'site/index',
             ],
         ],
     ],

@@ -21,8 +21,8 @@ class m190329_174204_favorite extends Migration
         ]);
 
         $this->createTable("favorite_genres", [
-            'favorite_id' => $this->integer()->notNull() . " references genre(id)",
-            'genre_id' => $this->integer()->notNull() . " references favorite(id)"
+            'favorite_id' => $this->integer()->notNull() . " references favorite(id)",
+            'genre_id' => $this->integer()->notNull() . " references genre(id)"
         ]);
     }
 
