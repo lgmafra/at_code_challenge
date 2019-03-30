@@ -11,10 +11,26 @@ export default class Movie extends Component {
         genres_name: ''
     }
 
-    getGenres = async (genre_ids) => {
+    getGenres = async (movie, isFavorite = false) => {
+        if(!isFavorite){
+            await this.getGenresTMDb(movie.genre_ids)
+        }else{
+            const genres_name = []
+        
+            if(movie.genres){
+                movie.genres.map(genre => (
+                    genres_name.push(genre.genre.name)
+                ))
+        
+                this.setState({genres_name: genres_name.join(', ')})
+            }
+        }
+    }
+
+    getGenresTMDb = async (genre_ids) => {
         const genres_name = []
         let genres = await Genre.getGenreNames(genre_ids)
-        
+    
         if(genres.data){
             genres.data.map(genre => (
                 genres_name.push(genre.name)
@@ -25,7 +41,7 @@ export default class Movie extends Component {
     }
 
     async componentDidMount(){
-        await this.getGenres(this.props.movie.genre_ids)
+        await this.getGenres(this.props.movie, this.props.isFavorite)
     }
 
     favorite = async (movie) => {
@@ -40,8 +56,28 @@ export default class Movie extends Component {
         await Favorire.saveFavorite(data)
     }
 
+    renderFavoriteButton = (isFavorite, movie) => {
+        if(!isFavorite){
+            return (
+                <div className='col-sm-6'>
+                    <button type='button' onClick={() => this.favorite(movie)}>
+                        <i className="fa fa-star"></i>
+                    </button>
+                </div>
+            )
+        }
+    }
+
+    getDetailsUrl = (isFavorite, page, movie) => {
+        if(isFavorite){
+            return { pathname: `/detail/${movie.movie_id}/${page}`, state: { prevPath: 'favorites' } }
+        }else{
+            return { pathname: `/detail/${movie.id}/${page}`, state: { prevPath: 'movies' } }
+        }
+    }
+
     render() {
-        const { movie } = this.props
+        const { movie, isFavorite, page } = this.props
         return (
             <div className="col-sm-12">
                 <div className="row px-2">
@@ -61,13 +97,9 @@ export default class Movie extends Component {
                         </div>
                         <div className="row">
                             <div className='col-sm-6'>
-                                <Link to={`/detail/${movie.id}`}>See details</Link>
+                                <Link to={this.getDetailsUrl(isFavorite, page, movie)}>See details</Link>
                             </div>
-                            <div className='col-sm-6'>
-                                <button type='button' onClick={() => this.favorite(movie)}>
-                                    <i className="fa fa-star"></i>
-                                </button>
-                            </div>
+                            {this.renderFavoriteButton(isFavorite, movie)}
                         </div>
                     </div>
                 </div>

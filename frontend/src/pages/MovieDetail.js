@@ -34,12 +34,18 @@ export default class MovieDetail extends Component {
         await this.loadMovieDetail()
     }
 
+    getBackUrl = (page) => {
+        return `/${this.props.location.state.prevPath}/${page}`
+    }
+
     render() {
+        const { page } = this.props.match.params;
+
         return (
             <div className="col-sm-8">
-                <Link to='/'>Voltar</Link>
+                <Link to={this.getBackUrl(page)}>Voltar</Link>
                 <div className="px-2">
-                    <img src={Utils.getBackdropUrl() + this.state.movie.backdrop_path} alt="" />
+                    <img src={this.state.movie.backdrop_path && Utils.getBackdropUrl() + this.state.movie.backdrop_path} alt="" />
                 </div>
                 <div className="px-2">
                     <div className="row">

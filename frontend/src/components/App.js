@@ -4,7 +4,11 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import '../css/App.css';
 
 import Home from '../pages/Home'
+import Movies from '../pages/Movies'
 import MovieDetail from '../pages/MovieDetail'
+import Favorites from '../pages/Favorites'
+
+import Menu from './Menu'
 
 import api from '../services/api'
 import Genre from '../services/genre'
@@ -35,15 +39,18 @@ class App extends Component {
 
     render() {
         return (
-            <div className="App">
-                <header className="App-header">
-                    <BrowserRouter>
-                        <Switch>
-                            <Route exact path="/:page?" component={(props) => <Home {...props} genres={this.loadGenres} ref={this.homeRef} />} />
-                            <Route path="/detail/:id" component={MovieDetail} />
-                        </Switch>
-                    </BrowserRouter>
-                </header>
+            <div className="App App-header">
+                <BrowserRouter>
+                    <div className="col-sm-12">
+                        <Menu />
+                    </div>
+                    <Switch>    
+                        <Route exact path="/" component={Home} />
+                        <Route path="/movies/:page?" component={(props) => <Movies {...props} genres={this.loadGenres} ref={this.homeRef} />} />
+                        <Route path="/detail/:id/:page?" component={MovieDetail} />
+                        <Route path="/favorites/:page?" component={Favorites} />
+                    </Switch>
+                </BrowserRouter>
             </div>
         );
     }
