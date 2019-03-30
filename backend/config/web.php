@@ -58,16 +58,25 @@ $config = [
             'rules' => [
                 [
                     'class' => 'yii\rest\UrlRule',
-                    'controller' => 'api/v1/genre',
+                    'controller' => 'v1/genre',
                     'extraPatterns' => [
                         'GET search' => 'search',
                     ],
                 ],
                 [
                     'class' => 'yii\rest\UrlRule',
-                    'controller' => 'api/v1/favorite',
+                    'controller' => 'v1/favorite',
                     'extraPatterns' => [
                         'GET search' => 'search',
+                    ],
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'v1/api',
+                    'extraPatterns' => [
+                        'GET listupcoming' => 'listupcoming',
+                        'GET searchmovie' => 'searchmovie',
+                        'GET moviedetail' => 'moviedetail',
                     ],
                 ],
             ],

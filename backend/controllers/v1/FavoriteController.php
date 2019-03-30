@@ -6,7 +6,7 @@
  * Time: 15:11
  */
 
-namespace app\controllers\api\v1;
+namespace app\controllers\v1;
 
 use Yii;
 use yii\rest\ActiveController;
@@ -75,8 +75,6 @@ class FavoriteController extends ActiveController
 
     public function actionSearch()
     {
-//        var_dump(Yii::$app->request->queryParams['movie_id']);
-//        exit();
         return Favorite::find()->where(['in', 'movie_id', Yii::$app->request->queryParams['movie_id']])->all();
     }
 
