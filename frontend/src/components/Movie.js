@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 
 import Genre from '../services/genre'
+import Favorire from '../services/favorite'
 import Utils from '../services/utils'
 
 export default class Movie extends Component {
@@ -27,6 +28,18 @@ export default class Movie extends Component {
         await this.getGenres(this.props.movie.genre_ids)
     }
 
+    favorite = async (movie) => {
+        const data = {
+            poster_path: movie.poster_path,
+            title: movie.title,
+            release_date: movie.release_date,
+            movie_id: movie.id,
+            genre_ids: movie.genre_ids
+        }
+
+        await Favorire.saveFavorite(data)
+    }
+
     render() {
         const { movie } = this.props
         return (
@@ -47,7 +60,14 @@ export default class Movie extends Component {
                             Release date: <label className="btn btn-sm btn-success">{movie.release_date}</label>
                         </div>
                         <div className="row">
-                            <Link to={`/detail/${movie.id}`}>See details</Link>
+                            <div className='col-sm-6'>
+                                <Link to={`/detail/${movie.id}`}>See details</Link>
+                            </div>
+                            <div className='col-sm-6'>
+                                <button type='button' onClick={() => this.favorite(movie)}>
+                                    <i className="fa fa-star"></i>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
