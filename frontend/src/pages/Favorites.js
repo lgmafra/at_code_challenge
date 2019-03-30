@@ -63,6 +63,8 @@ export default class Favorites extends Component {
                         </div>
                     ))}
                 </div>
+
+                <Pagination url="/favorites/" page={this.state.page} totalPages={this.state.totalPages} />
             </div>
         )
     }

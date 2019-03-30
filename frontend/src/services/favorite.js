@@ -14,5 +14,7 @@ export default class Favorite {
                 params: movie
             })
         }
+
+        return favorite.status === 200
     }
 }

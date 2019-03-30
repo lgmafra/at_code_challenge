@@ -43,7 +43,7 @@ export default class MovieDetail extends Component {
 
         return (
             <div className="col-sm-8">
-                <Link to={this.getBackUrl(page)}>Voltar</Link>
+                <Link to={this.getBackUrl(page)}><small><i className="fa fa-chevron-left"></i></small> Back</Link>
                 <div className="px-2">
                     <img src={this.state.movie.backdrop_path && Utils.getBackdropUrl() + this.state.movie.backdrop_path} alt="" />
                 </div>

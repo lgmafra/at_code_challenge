@@ -15,8 +15,8 @@ export default class Pagination extends Component {
                 to={`${url}${actualPage}`}
                 className={
                     index === 0
-                    ? "btn btn-info ml-1"
-                    : "btn btn-primary ml-1"
+                    ? "btn btn-success ml-1"
+                    : "btn btn-light ml-1"
                 }
             >{actualPage}</Link>
         )
@@ -24,7 +24,7 @@ export default class Pagination extends Component {
 
     renderExtremsButton = (symbol, page, url) => {
         return (
-            <Link to={`${url}${page}`} className="ml-1 btn btn-primary">{symbol}</Link>
+            <Link to={`${url}${page}`} className="ml-1 btn btn-light">{symbol}</Link>
         )
     }
 

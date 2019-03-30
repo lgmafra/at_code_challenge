@@ -119,6 +119,8 @@ export default class Movies extends Component {
                         </div>
                     ))}
                 </div>
+
+                <Pagination url="/movies/" page={this.state.page} totalPages={this.state.totalPages} />
             </div>
         )
     }

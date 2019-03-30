@@ -26,6 +26,14 @@ body {
   color: #61dafb;
 }
 
+.card-movie {
+  background-color: #696969;
+}
+
+.movies-rende {
+  text-align: center;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
