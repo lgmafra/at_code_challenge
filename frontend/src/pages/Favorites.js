@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
-import Utils from '../services/utils'
-import localApi from '../services/localApi'
+import Favorite from '../services/favorite'
 
 import Movie from '../components/Movie'
 import Pagination from '../components/Pagination'
@@ -16,12 +15,7 @@ export default class Favorites extends Component {
     }
 
     getFavoritesMovies = async (page) =>{
-        const response = await localApi.get('favorite',{
-            params: {
-                api_key: Utils.getAuthToken(),
-                page: page
-            }
-        })
+        const response = await Favorite.getFavorites(page)
 
         this.setMovieData(response)
     }

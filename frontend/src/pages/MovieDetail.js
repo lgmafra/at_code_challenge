@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 
-import localApi from '../services/localApi'
+import MovieService from '../services/movie'
 import Utils from '../services/utils'
 
 export default class MovieDetail extends Component {
@@ -12,11 +12,7 @@ export default class MovieDetail extends Component {
     }
 
     loadMovieDetail = async () => {
-        const movie = await localApi.get(`api/moviedetail?id=${this.props.match.params.id}`, {
-            params: {
-                api_key: Utils.getAuthToken()
-            }
-        })
+        const movie = await MovieService.getMovieDetail(this.props.match.params.id)
 
         const genres_name = []
         

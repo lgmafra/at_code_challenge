@@ -1,4 +1,5 @@
 import localApi from './localApi'
+import Utils from './utils'
 
 export default class Favorite {
 
@@ -16,5 +17,16 @@ export default class Favorite {
         }
 
         return favorite.status === 200
+    }
+
+    static getFavorites = async (page) => {
+        const response = await localApi.get('favorite',{
+            params: {
+                api_key: Utils.getAuthToken(),
+                page: page
+            }
+        })
+
+        return response
     }
 }
