@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import api from '../services/api'
+import localApi from '../services/localApi'
 import Utils from '../services/utils'
 
 import Movie from '../components/Movie'
@@ -16,7 +16,7 @@ export default class Movies extends Component {
     }
 
     getMovies = async (page = 1) => {
-        const response = await api.get('movie/upcoming',{
+        const response = await localApi.get('api/listupcoming',{
             params: {
                 api_key: Utils.getAuthToken(),
                 page: page
@@ -27,7 +27,7 @@ export default class Movies extends Component {
     }
 
     getMovieByFilter = async (filter, page = 1) => {
-        const response = await api.get('search/movie',{
+        const response = await localApi.get('api/searchmovie',{
             params: {
                 api_key: Utils.getAuthToken(),
                 query: filter,

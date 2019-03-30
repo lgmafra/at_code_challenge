@@ -14,7 +14,5 @@ export default class Favorite {
                 params: movie
             })
         }
-
-        console.log(favorite)
     }
 }
