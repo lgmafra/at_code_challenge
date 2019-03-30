@@ -18,6 +18,10 @@ use app\models\Genre;
 class FavoriteController extends ActiveController
 {
     public $modelClass = 'app\models\Favorite';
+    public $serializer = [
+        'class' => 'yii\rest\Serializer',
+        'collectionEnvelope' => 'items',
+    ];
 
     public function behaviors()
     {
