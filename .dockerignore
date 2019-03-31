@@ -1,0 +1,4 @@
+backend/vendor
+backend/db/database.db
+
+frontend/node_modules

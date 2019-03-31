@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  backend:
+    image: at_code_challenge
+    build: .
+    container_name: at_code_challenge_backend
+    volumes:
+      - ~/.composer-docker/cache:/root/.composer/cache:delegated
+      - ./backend:/app:delegated
+    ports:
+      - '8080:80'
+  frontend:
+    image: at_code_challenge
+    container_name: at_code_challenge_frontend
+    ports:
+      - 3000:3000
+    volumes:
+      - ./frontend:/at_challenge/frontend
+    command: yarn start
