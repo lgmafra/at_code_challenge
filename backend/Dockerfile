@@ -9,4 +9,5 @@ COPY . /app
 EXPOSE 80
 
 # RUN php yii migrate --interactive=0
-CMD [ "php", "yii", "migrate", "--interactive=0" ]
+# CMD [ "php", "yii", "migrate", "--interactive=0" ]
+ENTRYPOINT ["sh", "-c", "php yii migrate --interactive=0"]
