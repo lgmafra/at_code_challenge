@@ -15,6 +15,18 @@ services:
     container_name: at_code_challenge_frontend
     ports:
       - 3000:3000
+    depends_on:
+      - backend
     volumes:
       - ./frontend:/at_challenge/frontend
     command: yarn start
+  migrate:
+    image: at_code_challenge
+    container_name: at_code_challenge_migrate
+    depends_on:
+      - backend
+    volumes:
+      - ./backend:/app:delegated
+    command: >
+        sh -c "cd ../../app &&
+            php yii migrate --interactive=0"
