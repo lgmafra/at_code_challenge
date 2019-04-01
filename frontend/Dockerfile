@@ -6,15 +6,12 @@ RUN apt-get install nodejs -y
 
 RUN npm install --global yarn
 
-RUN mkdir -p /at_challenge/frontend
+WORKDIR /at_challenge/frontend
 
 COPY . /at_challenge/frontend
-
-WORKDIR /at_challenge/frontend
 
 EXPOSE 3000
 
 RUN yarn
 
-# CMD [ "yarn", "start" ]
-ENTRYPOINT ["sh", "-c", "yarn start"]
+# ENTRYPOINT ["yarn", "start"]

@@ -6,8 +6,10 @@ RUN chmod 755 /app
 
 COPY . /app
 
+RUN composer install
+
+RUN composer update
+
 EXPOSE 80
 
-# RUN php yii migrate --interactive=0
-# CMD [ "php", "yii", "migrate", "--interactive=0" ]
-ENTRYPOINT ["sh", "-c", "php yii migrate --interactive=0"]
+RUN php yii migrate --interactive=0
