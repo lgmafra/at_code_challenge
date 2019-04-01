@@ -2,7 +2,7 @@ version: '3'
 
 services:
   backend:
-    image: lgmafra/at_code_challenge
+    image: lgmafra/at_code_challenge_backend
     build: ./backend
     container_name: at_code_challenge_backend
     volumes:
@@ -11,9 +11,11 @@ services:
     ports:
       - '8080:80'
   frontend:
-    image: lgmafra/at_code_challenge
+    image: lgmafra/at_code_challenge_frontend
     build: ./frontend
     container_name: at_code_challenge_frontend
+    volumes:
+      - ./frontend:/at_challenge/frontend
     ports:
       - 3000:3000
     depends_on:
