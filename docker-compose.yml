@@ -2,8 +2,8 @@ version: '3'
 
 services:
   backend:
-    image: lgmafra/at_code_challenge_backend
-    build: ./backend
+    image: at_code_challenge
+    build: .
     container_name: at_code_challenge_backend
     volumes:
       - ~/.composer-docker/cache:/root/.composer/cache:delegated
@@ -11,13 +11,12 @@ services:
     ports:
       - '8080:80'
   frontend:
-    image: lgmafra/at_code_challenge_frontend
-    build: ./frontend
+    image: at_code_challenge
     container_name: at_code_challenge_frontend
-    volumes:
-      - ./frontend:/at_challenge/frontend
     ports:
       - 3000:3000
+    volumes:
+      - ./frontend:/at_challenge/frontend
     depends_on:
       - backend
     command: yarn start

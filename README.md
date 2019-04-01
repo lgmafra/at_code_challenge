@@ -31,26 +31,6 @@ To clone the project, use the command above
 git clone git@github.com:lgmafra/at_code_challenge.git
 ```
 
-After clone the project, There are two aways to build the project, using [Docker](https://www.docker.com/get-started) or run manually.
-
-### Building with Docker
-
-To build with `Docker`, make sure you have [Docker](https://www.docker.com/get-started) installed.
-
-After installed `Docker`, go to root directory and run above command:
-
-```
-docker-compose up
-```
-
-This will install the project that can be access by URL:
-
-```
-localhost:3000
-```
-
-### Building manually
-
 The next step is run first the back-end app. Before this, make sure you have [Composer](http://getcomposer.org/) intalled, or you may install it by following the instructions
 at [getcomposer.org](http://getcomposer.org/doc/00-intro.md#installation-nix).
 
@@ -75,6 +55,26 @@ Now you need to run the migrations, to create the database and the tables. To th
 ```
 php yii migrate
 ```
+
+After clone the project, There are two aways to build the project, using [Docker](https://www.docker.com/get-started) or run manually.
+
+### Building with Docker
+
+To build with `Docker`, make sure you have [Docker](https://www.docker.com/get-started) installed.
+
+After installed `Docker`, go to root directory and run above command:
+
+```
+docker-compose up
+```
+
+This will install the project that can be access by URL:
+
+```
+localhost:3000
+```
+
+### Building manually
 
 After this, you can run the application using the command
 ```
