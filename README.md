@@ -31,7 +31,27 @@ To clone the project, use the command above
 git clone git@github.com:lgmafra/at_code_challenge.git
 ```
 
-After clone the project, the next step is run first the back-end app. Before this, make sure you have [Composer](http://getcomposer.org/) intalled, or you may install it by following the instructions
+After clone the project, There are two aways to build the project, using [Docker](https://www.docker.com/get-started) or run manually.
+
+### Building with Docker
+
+To build with `Docker`, make sure you have [Docker](https://www.docker.com/get-started) installed.
+
+After installed `Docker`, go to root directory and run above command:
+
+```
+docker-compose up
+```
+
+This will install the project that can be access by URL:
+
+```
+localhost:3000
+```
+
+### Building manually
+
+The next step is run first the back-end app. Before this, make sure you have [Composer](http://getcomposer.org/) intalled, or you may install it by following the instructions
 at [getcomposer.org](http://getcomposer.org/doc/00-intro.md#installation-nix).
 
 2. Back-end app
@@ -63,11 +83,11 @@ php yii serve
 
 You can then access the application through the following URL:
 ```
-http://127.0.0.1:8000
+http://127.0.0.1:8080
 
 or
 
-http://localhost:8000
+http://localhost:8080
 ```
 
 
