@@ -11,19 +11,28 @@ export default class Movies extends Component {
         movies: [],
         query_movie: '',
         page: null,
-        totalPages: null
+        totalPages: null,
+        isLoading: false
     }
 
     getMovies = async (page = 1) => {
+        this.setIsLoading()
+
         const response = await MovieService.getUpcomingMovies(page)
 
         this.setMovieData(response)
     }
 
     getMovieByFilter = async (filter, page = 1) => {
+        this.setIsLoading()
+
         const response = await MovieService.searchMovie(page, filter)
 
         this.setMovieData(response)
+    }
+
+    setIsLoading = () => {
+        this.setState({isLoading: !this.state.isLoading})
     }
 
     componentDidMount(){
@@ -35,7 +44,8 @@ export default class Movies extends Component {
         this.setState({
             page: response.data.page,
             totalPages: response.data.total_pages,
-            movies: response.data.results
+            movies: response.data.results,
+            isLoading: !this.state.isLoading
         })
     }
 
@@ -75,6 +85,32 @@ export default class Movies extends Component {
         )
     }
 
+    renderInformation = () => {
+        if(this.state.movies.length > 0){
+            return (
+                <div>
+                    <Pagination url="/movies/" page={this.state.page} totalPages={this.state.totalPages} />
+
+                    <div className="row">
+                        {this.state.movies.map(movie => (
+                            <div className="col-sm-6" key={movie.id}>
+                                <Movie key={movie.id} page={this.state.page} movie={movie} />
+                            </div>
+                        ))}
+                    </div>
+
+                    <Pagination url="/movies/" page={this.state.page} totalPages={this.state.totalPages} />
+                </div>
+            )
+        }else{
+            return <h1>No data found.</h1>
+        }
+    }
+
+    showLoading = () => {
+        return <h1>Loading...</h1>
+    }
+
     render() {
         return (
             <div className="col-sm-12 mt-2">
@@ -98,17 +134,7 @@ export default class Movies extends Component {
                     </div>
                 </div>
 
-                <Pagination url="/movies/" page={this.state.page} totalPages={this.state.totalPages} />
-
-                <div className="row">
-                    {this.state.movies.map(movie => (
-                        <div className="col-sm-6" key={movie.id}>
-                            <Movie key={movie.id} page={this.state.page} movie={movie} />
-                        </div>
-                    ))}
-                </div>
-
-                <Pagination url="/movies/" page={this.state.page} totalPages={this.state.totalPages} />
+                {this.state.isLoading ? this.showLoading() : this.renderInformation()}
             </div>
         )
     }
