@@ -43,12 +43,12 @@ cd backend/
 
 Now update the app vendor packges
 ```
-php composer update
+composer update
 ```
 
 Run the installation triggers (creating cookie validation code)
 ```
-php composer install
+composer install
 ```
 
 Now you need to run the migrations, to create the database and the tables. To this, run:
@@ -56,7 +56,21 @@ Now you need to run the migrations, to create the database and the tables. To th
 php yii migrate
 ```
 
-After clone the project, There are two aways to build the project, using [Docker](https://www.docker.com/get-started) or run manually.
+3. Front-end app
+
+Before run front-end, is necessary install [NodeJs](https://nodejs.org/en/)
+
+Once, the back-end is running and NodeJs is installed, now we can run the front-end app. For this, move to root directory, and then go to `frontend` directory
+```
+cd frontend/
+```
+
+In front-end directory, run a command to install all project dependencys
+```
+npm install
+```
+
+After do initials configurations, There are two aways to build the project, using [Docker](https://www.docker.com/get-started) or run manually.
 
 ### Building with Docker
 
@@ -76,7 +90,7 @@ localhost:3000
 
 ### Building manually
 
-After this, you can run the application using the command
+First, go to the root directory and then go to `backend` directory. After this, you can run the application using the command
 ```
 php yii serve
 ```
@@ -90,22 +104,7 @@ or
 http://localhost:8080
 ```
 
-
-3. Front-end app
-
-Before run front-end, is necessary install [NodeJs](https://nodejs.org/en/)
-
-Once, the back-end is running and NodeJs is installed, now we can run the front-end app. For this, move to root directory, and then go to `frontend` directory
-```
-cd frontend/
-```
-
-In front-end directory, run a command to install all project dependencys
-```
-npm install
-```
-
-After install, run a command to run the application
+After run the `backend`, go to the root directory and then go to `frontend` directory, run a command to run the application
 ```
 npm start
 ```
